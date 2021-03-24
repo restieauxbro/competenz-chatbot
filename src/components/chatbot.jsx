@@ -107,7 +107,6 @@ const CallOut = ({ openCallout, setOpenCallout, openChat, setOpenChat }) => {
 
   return (
     <>
-      <h1>{chosenQuote}</h1>
       <div className="callout-cnt">
         <AnimatePresence>
           {openCallout && !openChat && (
@@ -180,5 +179,3 @@ const openSide = {
 const fadeOut = {
   animate: { opacity: 0 },
 };
-
-
