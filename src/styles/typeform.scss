@@ -5,7 +5,6 @@ body {
   overflow-x: hidden;
   line-height: 1.5;
   width: 100vw;
-  
 
   --text: #494949;
   --lightblue: #21a3d9;
@@ -45,7 +44,7 @@ body {
     justify-content: center;
     cursor: pointer;
     background: var(--lightblue);
-     box-shadow: -3px 3px 5px var(--shadow);
+    box-shadow: -3px 3px 5px var(--shadow);
     svg {
       margin-top: 7px;
     }

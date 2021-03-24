@@ -90,11 +90,11 @@ const CallOut = ({ openCallout, setOpenCallout, openChat, setOpenChat }) => {
       setOpenCallout(true);
     }, time);
   }
-  function closeOnTimer(time) {
-    setTimeout(() => {
-      setOpenCallout(false);
-    }, time);
-  }
+  // function closeOnTimer(time) {
+  //   setTimeout(() => {
+  //     setOpenCallout(false);
+  //   }, time);
+  // }
 
   function decideHowCalloutAppears(pageLocation) {
     pageLocation === "/" ? openOnTimer(4000) : console.log("");
@@ -103,7 +103,7 @@ const CallOut = ({ openCallout, setOpenCallout, openChat, setOpenChat }) => {
   useEffect(() => {
     checkPageAndAssignQuote(window.location.pathname);
     decideHowCalloutAppears(window.location.pathname);
-  }, []);
+  });
 
   return (
     <>
