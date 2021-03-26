@@ -8,54 +8,63 @@ export const ChatButton = () => {
 
   return (
     <>
-      <CallOut
-        openCallout={openCallout}
-        setOpenCallout={setOpenCallout}
-        openChat={openChat}
-        setOpenChat={setOpenChat}
-      />
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1, transition: standardTransition }}
-        className="chat-container"
-      >
-        <div
-          className="chat-button"
-          onClick={() => {
-            setOpenChat(!openChat);
-            setOpenCallout(false);
-          }}
-        >
-          <svg width="24" height="24" fill="none" viewBox="0 0 84 83">
-            <rect width="84" height="56" fill="#fff" rx="8"></rect>
-            <path fill="#fff" d="M43 50h41v33L43 50z" opacity=".7"></path>
-          </svg>
-        </div>
-      </motion.div>
-
-      <motion.div
-        className="chat-box-cnt"
-        style={openChat ? { pointerEvents: "all" } : { pointerEvents: "none" }}
-        variants={openChat ? chatParent : null}
-        initial="initial"
-        animate="animate"
-      >
-        <div className="chat-box">
-          <motion.iframe
-            variants={openChat ? childFadeUp : fadeOut}
-            width="100%"
-            height="100%"
-            src="https://pc792805.typeform.com/c/V4mLSLvr"
+      <div className="total-chatbot-cnt">
+        <div className="center-chatbot">
+          <CallOut
+            openCallout={openCallout}
+            setOpenCallout={setOpenCallout}
+            openChat={openChat}
+            setOpenChat={setOpenChat}
           />
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            whileTap={{ scale: 0.99 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1, transition: standardTransition }}
+            className="chat-container"
+          >
+            <div
+              className="chat-button"
+              onClick={() => {
+                setOpenChat(!openChat);
+              }}
+            >
+              <svg width="24" height="24" fill="none" viewBox="0 0 84 83">
+                <rect width="84" height="56" fill="#fff" rx="8"></rect>
+                <path fill="#fff" d="M43 50h41v33L43 50z" opacity=".7"></path>
+              </svg>
+            </div>
+          </motion.div>
+
+          <AnimatePresence>
+            {openChat && (
+              <motion.div
+                className="chat-box-cnt"
+                variants={chatParent}
+                initial="initial"
+                animate="animate"
+                exit={{ opacity: 0, height: 0 }}
+              >
+                <div className="chat-box">
+                  <motion.iframe
+                    variants={openChat ? childFadeUp : fadeOut}
+                    width="100%"
+                    height="100%"
+                    src="https://pc792805.typeform.com/c/V4mLSLvr"
+                  />
+                </div>
+                <motion.div
+                  variants={openChat ? childFadeUp : fadeOut}
+                  className="exit"
+                  onClick={() => setOpenChat(false)}
+                >
+                  +
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
-        <motion.div
-          variants={openChat ? childFadeUp : fadeOut}
-          className="exit"
-          onClick={() => setOpenChat(false)}
-        >
-          +
-        </motion.div>
-      </motion.div>
+      </div>
     </>
   );
 };
@@ -63,18 +72,23 @@ export const ChatButton = () => {
 const CallOut = ({ openCallout, setOpenCallout, openChat, setOpenChat }) => {
   const [chosenQuote, setChosenQuote] = useState("");
 
-  function checkPageAndAssignQuote(pageLocation) {
-    pageLocation === "/"
+  function checkPageAndAssignQuote(windowLocation) {
+    var pathName = windowLocation.pathname;
+    pathName === "/"
       ? setChosenQuote(
           "<strong>Nau mai haere mai </strong> <br/> let us know how we can help."
         )
-      : pageLocation === "/jobseekers/finding-a-job"
+      : pathName === "/jobseekers/finding-a-job"
       ? setChosenQuote(
-          "<strong> Didn't find what you were looking for? </strong> <br/> <br/>Register your interest with us and stay updated"
+          "<strong> Didn't find a job you wanted? </strong> <br/> <br/>Register with us and stay updated."
         )
-      : pageLocation === "/reform-of-vocational-education"
+      : pathName === "/reform-of-vocational-education"
       ? setChosenQuote(
           "<strong>Got a question about RoVE?</strong><br/> <br/> Let us know!"
+        )
+      : windowLocation.href.indexOf("employers") > -1
+      ? setChosenQuote(
+          "<strong>Ready to get started? </strong> <br/> Connect with an advisor."
         )
       : setChosenQuote(
           "<strong>Nau mai haere mai </strong> <br/> let us know how we can help."
@@ -87,23 +101,37 @@ const CallOut = ({ openCallout, setOpenCallout, openChat, setOpenChat }) => {
 
   function openOnTimer(time) {
     setTimeout(() => {
-      setOpenCallout(true);
+      if (sessionStorage.getItem("exitedCallout") !== "true") {
+        setOpenCallout(true);
+      }
     }, time);
   }
-  // function closeOnTimer(time) {
-  //   setTimeout(() => {
-  //     setOpenCallout(false);
-  //   }, time);
-  // }
+  function closeOnTimer(time) {
+    setTimeout(() => {
+      setOpenCallout(false);
+    }, time);
+  }
 
-  function decideHowCalloutAppears(pageLocation) {
-    pageLocation === "/" ? openOnTimer(4000) : console.log("");
+  function openWithTimers(opentime, closetime) {
+    openOnTimer(opentime);
+    closeOnTimer(closetime);
+  }
+
+  function decideHowCalloutAppears(windowLocation) {
+    var pathName = windowLocation.pathname;
+    pathName === ("/" || "/reform-of-vocational-education")
+      ? openWithTimers(4000, 12000)
+      : pathName === "/jobseekers/finding-a-job"
+      ? openWithTimers(7000, 14000)
+      : windowLocation.href.indexOf("employers") > -1
+      ? openWithTimers(4000, 12000)
+      : console.log("");
   }
 
   useEffect(() => {
-    checkPageAndAssignQuote(window.location.pathname);
-    decideHowCalloutAppears(window.location.pathname);
-  });
+    checkPageAndAssignQuote(window.location);
+    decideHowCalloutAppears(window.location);
+  }, []);
 
   return (
     <>
@@ -130,7 +158,10 @@ const CallOut = ({ openCallout, setOpenCallout, openChat, setOpenChat }) => {
                 initial="initial"
                 animate="animate"
                 exit={{ opacity: 0 }}
-                onClick={() => setOpenCallout(false)}
+                onClick={() => (
+                  setOpenCallout(false),
+                  sessionStorage.setItem("exitedCallout", "true")
+                )}
               >
                 +
               </motion.div>
