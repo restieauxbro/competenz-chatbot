@@ -9,7 +9,6 @@ export const ChatButton = () => {
 
   return (
     <>
-      <h1>{queryString}</h1>
       <div className="total-chatbot-cnt">
         <div className="center-chatbot">
           <CallOut
