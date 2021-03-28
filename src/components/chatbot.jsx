@@ -5,9 +5,11 @@ import "../styles/typeform.scss";
 export const ChatButton = () => {
   const [openChat, setOpenChat] = useState(false);
   const [openCallout, setOpenCallout] = useState(false);
+  const queryString = window.location.search;
 
   return (
     <>
+      <h1>{queryString}</h1>
       <div className="total-chatbot-cnt">
         <div className="center-chatbot">
           <CallOut
@@ -50,7 +52,7 @@ export const ChatButton = () => {
                     variants={openChat ? childFadeUp : fadeOut}
                     width="100%"
                     height="100%"
-                    src="https://pc792805.typeform.com/c/V4mLSLvr"
+                    src={`https://pc792805.typeform.com/c/V4mLSLvr${queryString}`}
                   />
                 </div>
                 <motion.div
@@ -76,7 +78,7 @@ const CallOut = ({ openCallout, setOpenCallout, openChat, setOpenChat }) => {
     var pathName = windowLocation.pathname;
     pathName === "/"
       ? setChosenQuote(
-          "<strong>Nau mai haere mai </strong> <br/> let us know how we can help."
+          "<strong>Nau mai, haere mai </strong> <br/> let us know how we can help."
         )
       : pathName === "/jobseekers/finding-a-job"
       ? setChosenQuote(
@@ -120,11 +122,11 @@ const CallOut = ({ openCallout, setOpenCallout, openChat, setOpenChat }) => {
   function decideHowCalloutAppears(windowLocation) {
     var pathName = windowLocation.pathname;
     pathName === ("/" || "/reform-of-vocational-education")
-      ? openWithTimers(4000, 12000)
+      ? openWithTimers(4000, 16000)
       : pathName === "/jobseekers/finding-a-job"
       ? openWithTimers(7000, 14000)
       : windowLocation.href.indexOf("employers") > -1
-      ? openWithTimers(4000, 12000)
+      ? openWithTimers(4000, 16000)
       : console.log("");
   }
 
