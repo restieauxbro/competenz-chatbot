@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const Phone = () => {
-  const [phoneOpen, setPhoneOpen] = useState(false);
+  const [phoneOpen, setPhoneOpen] = useState(true);
   const [officeOpen, setOfficeOpen] = useState(false);
 
   var currentTimeDate = new Date();
