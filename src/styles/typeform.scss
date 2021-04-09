@@ -12,7 +12,7 @@ body {
   --pink: #ebbcb3;
 
   --blue: #02548e;
-  --lime: #7ff7ba;
+  --lime: #00debd;
   --darkblue: #0d114e;
   --light-purple: #a799e6;
   --dark-purple: #6f0b6f;
@@ -34,7 +34,7 @@ body {
   .center-chatbot {
     position: relative;
     width: calc(100vw - 80px);
-    max-width: 1230px;
+    max-width: 1388px;
     height: 100%;
     background-color: white;
     margin: 0 auto;
@@ -151,4 +151,43 @@ body {
 
 iframe {
   border: none;
+}
+
+.phone-cnt {
+  position: absolute;
+  right: 0;
+  bottom: 95px;
+  transform-origin: center;
+  cursor: pointer;
+
+  .phone-button-cnt {
+    position: absolute;
+    right: 0;
+    height: 32px;
+    width: 32px;
+    border-radius: 100%;
+    box-shadow: -3px 3px 5px rgba(0, 0, 0, 0.2);
+    .phone-icon {
+      fill: white;
+      width: 55%;
+      margin: 22.5%;
+      transform: scaleX(-1);
+    }
+  }
+  .phone-message-cnt {
+    position: absolute;
+    top: -12px;
+    right: 10px;
+    overflow: hidden;
+    padding: 15px 0 15px 15px;
+  }
+  .phone-message {
+    font-size: 12px;
+    color: var(--lightblue);
+    padding: 0.3em 2em 0.3em 1em;
+    background-color: white;
+    box-shadow: -1px 1px 5px rgba(0, 0, 0, 0.2);
+    width: 90px;
+    border-radius: 5em;
+  }
 }

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import "../styles/typeform.scss";
+import Phone from "./phone";
 
 export const ChatButton = () => {
   const [openChat, setOpenChat] = useState(false);
@@ -18,8 +19,6 @@ export const ChatButton = () => {
             setOpenChat={setOpenChat}
           />
           <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.99 }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1, transition: standardTransition }}
             className="chat-container"
@@ -35,6 +34,7 @@ export const ChatButton = () => {
                 <path fill="#fff" d="M43 50h41v33L43 50z" opacity=".7"></path>
               </svg>
             </div>
+            <Phone />
           </motion.div>
 
           <AnimatePresence>
@@ -77,7 +77,7 @@ const CallOut = ({ openCallout, setOpenCallout, openChat, setOpenChat }) => {
     var pathName = windowLocation.pathname;
     pathName === "/"
       ? setChosenQuote(
-          "<strong>Nau mai, haere mai </strong> <br/> let us know how we can help."
+          "<strong>Nau mai, haere mai </strong> <br/> Let us know how we can help."
         )
       : pathName === "/jobseekers/finding-a-job"
       ? setChosenQuote(
@@ -196,7 +196,7 @@ const childFadeUp = {
   animate: { opacity: 1, transition: { duration: 0.3 } },
 };
 
-const spring = {
+export const spring = {
   type: "spring",
   duration: 0.8,
   damping: 8,
