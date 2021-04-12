@@ -8,6 +8,12 @@ export const ChatButton = () => {
   const [openCallout, setOpenCallout] = useState(false);
   const queryString = window.location.search;
 
+  const [phoneButtonExists, setPhoneButtonExists] = useState(false);
+  useEffect(() => {
+    window.location.href.indexOf("contact-us") > -1 &&
+      setPhoneButtonExists(true);
+  }, []);
+
   return (
     <>
       <div className="total-chatbot-cnt">
@@ -34,7 +40,7 @@ export const ChatButton = () => {
                 <path fill="#fff" d="M43 50h41v33L43 50z" opacity=".7"></path>
               </svg>
             </div>
-            <Phone />
+            {phoneButtonExists && <Phone />}
           </motion.div>
 
           <AnimatePresence>
@@ -79,11 +85,11 @@ const CallOut = ({ openCallout, setOpenCallout, openChat, setOpenChat }) => {
       ? setChosenQuote(
           "<strong>Nau mai, haere mai </strong> <br/> Let us know how we can help."
         )
-      : pathName === "/jobseekers/finding-a-job"
+      : pathName === "/jobseekers/finding-a-job/"
       ? setChosenQuote(
           "<strong> Didn't find a job you wanted? </strong> <br/> <br/>Register with us and stay updated."
         )
-      : pathName === "/reform-of-vocational-education"
+      : pathName === "/reform-of-vocational-education/"
       ? setChosenQuote(
           "<strong>Got a question about RoVE?</strong><br/> <br/> Let us know!"
         )
@@ -120,9 +126,9 @@ const CallOut = ({ openCallout, setOpenCallout, openChat, setOpenChat }) => {
 
   function decideHowCalloutAppears(windowLocation) {
     var pathName = windowLocation.pathname;
-    pathName === ("/" || "/reform-of-vocational-education")
+    pathName === ("/" || "/reform-of-vocational-education/")
       ? openWithTimers(4000, 16000)
-      : pathName === "/jobseekers/finding-a-job"
+      : pathName === "/jobseekers/finding-a-job/"
       ? openWithTimers(7000, 14000)
       : windowLocation.href.indexOf("employers") > -1
       ? openWithTimers(4000, 16000)
