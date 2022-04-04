@@ -180,7 +180,7 @@ const CallOut = ({ openCallout, setOpenCallout, openChat, setOpenChat }) => {
   );
 };
 
-const height = "clamp(500px, 65vh, 650px)";
+const height = "clamp(500px, 80vh, 650px)";
 const easeOut = [0.08, 0.69, 0.56, 0.97];
 const standardTransition = { duration: 0.6, ease: easeOut };
 const chatParent = {

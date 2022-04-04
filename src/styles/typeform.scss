@@ -81,7 +81,7 @@ body {
   background: white;
   border-radius: 0.5rem;
   overflow: hidden;
-  z-index: 10;
+  z-index: 1000;
   box-shadow: -3px 3px 15px var(--shadow-light);
   @media (max-width: 700px) {
     bottom: 77px;
