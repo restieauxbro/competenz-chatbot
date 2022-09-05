@@ -2,17 +2,16 @@ import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import "../styles/typeform.scss";
 import Phone from "./phone";
+import TypeformWidget from "./TypeformWidget";
 
 export const ChatButton = () => {
   const [openChat, setOpenChat] = useState(false);
   const [openCallout, setOpenCallout] = useState(false);
   const queryString = window.location.search;
 
-  const [phoneButtonExists, setPhoneButtonExists] = useState(false);
-  useEffect(() => {
-    window.location.href.indexOf("contact-us") > -1 &&
-      setPhoneButtonExists(true);
-  }, []);
+  const phoneButtonExists =
+    typeof window !== "undefined" &&
+    window?.location?.href?.indexOf("contact-us") > -1;
 
   return (
     <>
@@ -52,14 +51,13 @@ export const ChatButton = () => {
                 animate="animate"
                 exit={{ opacity: 0, height: 0 }}
               >
-                <div className="chat-box">
-                  <motion.iframe
-                    variants={openChat ? childFadeUp : fadeOut}
-                    width="100%"
-                    height="100%"
-                    src={`https://pc792805.typeform.com/c/V4mLSLvr${queryString}`}
-                  />
-                </div>
+                <motion.div
+                  className="chat-form"
+                  variants={openChat ? childFadeUp : fadeOut}
+                >
+                  <TypeformWidget chat hidden_fields={{ fname: "tim" }} />
+                </motion.div>
+
                 <motion.div
                   variants={openChat ? childFadeUp : fadeOut}
                   className="exit"

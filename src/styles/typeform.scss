@@ -90,14 +90,12 @@ body {
     position: fixed;
     width: 95vw;
     right: 2.5vw;
-    
   }
-  .chat-box {
-    height: calc(100% - 3rem);
-    width: 100%;
-    position: absolute;
-    bottom: 0;
+
+  .chat-form {
+    height: 100%;
   }
+
   .exit {
     position: absolute;
     right: 13px;
