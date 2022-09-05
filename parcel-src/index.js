@@ -2,36 +2,32 @@ import React, { Suspense } from "react";
 import ReactDOM from "react-dom/client";
 import '../src/styles/typeform.scss'
 
-const ConvoFormApp = React.lazy(() =>
-  import("../components/question-tree/ConvoFormApp")
+const Chatbot = React.lazy(() =>
+  import("../src/components/chatbot")
 );
-const SkillsMatcher = React.lazy(() =>
-  import("../components/skills-matcher/SkillsMatcher")
-);
-
-const CarouselSearch = React.lazy(() =>
-  import("../components/website-ui/CarouselAndSearch")
+const TypeformWidget = React.lazy(() =>
+  import("../src/components/TypeformWidget")
 );
 
 const App = ({ component, options }) => {
   const switchComponent = () => {
     switch (component) {
-      case "convo-form":
+      case "chatbot":
         return (
           <Suspense fallback={null}>
-            <ConvoFormApp {...options} />
+            <Chatbot {...options} />
           </Suspense>
         );
       case "skills-matcher":
         return (
           <Suspense fallback={null}>
-            <SkillsMatcher {...options} />
+            <TypeformWidget {...options} />
           </Suspense>
         );
       default:
         return (
           <Suspense fallback={null}>
-            <CarouselSearch {...options} />
+            <TypeformWidget {...options} />
           </Suspense>
         );
     }
@@ -46,7 +42,7 @@ window.loadCzTypeform = function (el, { component, options }) {
 
 if (process.env.NODE_ENV === "development") {
   loadCzTypeform("intelligent-nav-root", {
-    component: "search",
+    component: "chatbot",
     options: {
       questionsFile: "lead-form",
     },

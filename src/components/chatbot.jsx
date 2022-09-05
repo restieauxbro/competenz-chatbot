@@ -4,7 +4,7 @@ import "../styles/typeform.scss";
 import Phone from "./phone";
 import TypeformWidget from "./TypeformWidget";
 
-export const ChatButton = () => {
+export default ChatButton = () => {
   const [openChat, setOpenChat] = useState(false);
   const [openCallout, setOpenCallout] = useState(false);
   const queryString = window.location.search;
@@ -55,7 +55,7 @@ export const ChatButton = () => {
                   className="chat-form"
                   variants={openChat ? childFadeUp : fadeOut}
                 >
-                  <TypeformWidget chat hidden_fields={{ fname: "tim" }} />
+                  <TypeformWidget hidden_fields={{ fname: "tim" }} />
                 </motion.div>
 
                 <motion.div
