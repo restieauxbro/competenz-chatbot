@@ -17,19 +17,19 @@ const TypeformWidget = (props) => {
   }
 
   return (
-    <Widget
-      {...{
-        ...props,
-        hidden: props.hidden_fields,
-        id: props.id || "V4mLSLvr",
-        onQuestionChanged: (id) => questionViewed({ id }),
-        onSubmit: (id) => formSubmitted({ id }),
-        style: {
-          width: "100%",
-          height: props.height || props.chat ? "100%" : 600,
-        },
-      }}
-    />
+    <>
+      <Widget
+        {...{
+          ...props,
+          onQuestionChanged: (id) => questionViewed({ id }),
+          onSubmit: (id) => formSubmitted({ id }),
+          style: {
+            width: "100%",
+            height: props.height || props.chat ? "100%" : 600,
+          },
+        }}
+      />
+    </>
   );
 };
 
