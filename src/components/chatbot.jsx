@@ -15,7 +15,6 @@ export default ChatButton = (props) => {
 
   return (
     <>
-    {JSON.stringify(props)}
       <div className="total-chatbot-cnt">
         <div className="center-chatbot">
           <CallOut

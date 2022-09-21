@@ -50,14 +50,9 @@ if (process.env.NODE_ENV === "development") {
   loadCzTypeform("intelligent-nav-root", {
     component: "button",
     options: {
-      id: "Xtos4S2i",
-      hidden: {
-        job_title: "Software Engineer",
-        job_region: "Czech Republic",
-        company_name: "Tim's Stainless Steel",
-      },
-      button_text: 'Click me',
-      button_classes: 'btn btn-primary',
+      id: "i0j6V70F",
+      button_classes: "button-standard spacing w-button",
+      button_text: "Register interest",
     },
   });
 }
